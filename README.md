@@ -340,15 +340,40 @@ Setup is now ready to begin configuring ODK Aggregate.
 Do you want to continue? [Y/n]: y
 ```
 
-Si va a la carpeta de instalación ( /home/sr/odk), encontrará tres archivos.
+Si va a la carpeta de instalación ( /home/user/odksrc), encontrará tres archivos.
 ```
 ODKAggregate.war
 README.html
 create_db_and_user.sql
 ```
 
+Ahora copiamos el .war dentro del tomcat desplegar Odk Aggregate
+
+```bash
+cp /home/user/odksrc/ODK\ Aggregate/ODKAggregate.war  /var/lib/tomcat8/webapps/odk.war
+```
+Ahora creamos la base de datos e ingresamos al postgres
+
+```bash
+sudo su postgres 
+psql
+```
+
+```sql
+create database "odk_prod";
+create user "odk_user" with unencrypted password 'mypassword';
+grant all privileges on database "odk_prod" to "odk_user";
+alter database "odk_prod" owner to "odk_user";
+\c "odk_prod";
+create schema "odk_prod";
+grant all privileges on schema "odk_prod" to "odk_user";
+\q
+```
 
 
+Y listo ya tenemos nuestro servidor Odk Aggregate
+
+<img src="https://github.com/erickramirez82/Odk_Aggregate_Server/blob/master/odk-aggregate.png" />
 
 
 
