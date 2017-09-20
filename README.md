@@ -122,9 +122,230 @@ Ahora vamos a comprobar si nuestro servidor MySQL funciona. Utilice su contrase�
 ```bash
 mysql -u root -p
 ```
+4. Vamos instalar <a href="https://opendatakit.org/downloads/download-category/aggregate/" target="_blank">ODK Aggregate</a>
 
+<img src="https://github.com/erickramirez82/Odk_Aggregate_Server/blob/master/Descargar_odkaggregate.png">
 
+```bash
+wget https://s3.amazonaws.com/opendatakit.downloads/ODK%20Aggregate%20v1.4.12%20linux-x64-installer.run
+chmod +x ODK\ Aggregate\ v1.4.12\ linux-x64-installer.run
+./ODK\ Aggregate\ v1.4.12\ linux-x64-installer.run
+```
 
+El instalador creará un archivo .wary .sqlbasado en las configuraciones que establezca. El .sqlarchivo tendrá los códigos necesarios para las bases de datos y el .wararchivo establecerá la aplicación web. Mantenga presionando la tecla Intro (Intro) para desplazarse por los archivos de configuración iniciales, probablemente tendrá siete o nueve devoluciones.
+
+<img src="https://github.com/erickramirez82/Odk_Aggregate_Server/blob/master/instalar_Odk.png" />
+
+Aceptamos las licencia
+
+```
+Do you accept this license? [y/n]: y
+```
+
+Los preguntas vamos encontrar durante la instalación
+
+```
+----------------------------------------------------------------------------
+ Select an output parent directory
+ 
+This "installer" does not actually install anything. Instead, it guides you
+through configuring ODK Aggregate. As the last step of the installer, it will
+either launch the upload tool for uploading to Google's AppEngine cloud services
+or open a README.html containing the final installation instructions for MySQL
+or PostgreSQL deployments.
+ 
+Please select the parent directory under which an 'ODK Aggregate' directory will
+be created to contain the configured software.
+ 
+[]: /home/sr/odk
+ 
+----------------------------------------------------------------------------
+Choose Platform
+ 
+Choose the data storage and execution environment on which you would like ODK Aggregate to run. 
+If you choose MySQL or PostgreSQL, you will need to first install that database server and 
+an Apache Tomcat 6 webserver.
+ 
+[1] Google App Engine: Uses Google's cloud-based data storage and webserver services.
+[2] MySQL: Uses a MySQL database and an Apache Tomcat 6 webserver that you install.
+[3] PostgreSQL: Uses a PostgreSQL database and an Apache Tomcat 6 webserver that you install.
+Please choose an option [1] : 2
+ 
+----------------------------------------------------------------------------
+Pre-installation Requirements - Apache Tomcat
+ 
+Before continuing, you should download and install an Apache Tomcat 6 webserver
+within which you will run ODK Aggregate (instructions on installing your chosen
+database will be presented later).
+ 
+Apache Tomcat 6 can be downloaded from the link below.
+ 
+If you modify any of the Apache Tomcat defaults, please make note of them.
+ 
+http://tomcat.apache.org/download-60.cgi [Y/n]: y
+ 
+----------------------------------------------------------------------------
+Apache Tomcat SSL configuration
+ 
+SSL certificates allow a client to verify the identity of a webserver and to
+establish secured (encrypted) communications with that webserver (https:). SSL
+certificates are typically purchased from Verisign or another issuing authority;
+that process can take weeks to complete.
+ 
+If you do have an SSL certificate, please refer to the Apache Tomcat
+documentation for how to install the certificate on your system. Within the
+Tomcat 6.0 documentation, refer to the User Guide section 12: SSL.
+ 
+http://tomcat.apache.org/tomcat-6.0-doc/ssl-howto.html [Y/n]: y
+ 
+----------------------------------------------------------------------------
+Apache Tomcat SSL configuration
+ 
+Do you have an SSL certificate?
+ 
+[1] No, I do not have an SSL certificate: - User logins ARE secure.
+- Submitting and/or viewing form data MAY NOT BE secure.
+- Changing passwords MAY NOT BE secure.
+Security breaches are particularly likely over unsecured WiFi hotspots.
+ 
+[2] Yes, I have an SSL certificate: - User logins ARE secure.
+- Submitting and/or viewing form data IS secure.
+- Changing passwords IS secure.
+ 
+Please choose an option [1] : 1
+ 
+----------------------------------------------------------------------------
+Apache Tomcat Port Configuration
+ 
+ODK Aggregate needs to know the port numbers and the Internet-visible IP address
+or DNS name through which it can be reached in order to construct links back to
+its content when publishing or exporting data files.
+ 
+Follow the ODK Aggregate Tomcat Install instructions (link below) to make your
+computer accessible on the web (using an Internet-visible IP address) and to
+establish a DNS name.
+ 
+http://opendatakit.org/use/aggregate/tomcat-install/#Configure_for_Network_Access [Y/n]: y
+ 
+HTTP/1.1. Connector Port: [8080]: 8080
+ 
+Internet-visible IP address or DNS name: [srv1.clubgis.net]: xxx.xxx.xx.xx
+ 
+----------------------------------------------------------------------------
+Pre-installation Database Requirements - MySQL
+ 
+We have developed and tested against MySQL 5.1 and 5.5
+ 
+Please download, install and configure MySQL from the link below.
+ 
+Choose the Downloads (GA) tab, and select the MySQL Community Server edition.
+When running the MySQL Server Instance Configuration Wizard, please make note of
+your root password and any non-default values you have entered during the
+installation process.
+ 
+http://www.mysql.com/downloads/ [Y/n]: y
+ 
+----------------------------------------------------------------------------
+Pre-installation Database Requirements - MySQL (concluded)
+ 
+You also must install a MySQL library on the Apache Tomcat instance.
+Please download the MySQL Connector/J zip file from the link below.
+ 
+Unzip or extract the contents of this file to a directory on your system.
+The top-level directory should contain a file named:
+ 
+mysql-connector-java-...-bin.jar
+ 
+Copy this file into the /lib directory of your Apache Tomcat 6 installation. On
+Windows, the default location for this is 'C:\Program Files\Apache Software
+Foundation\Tomcat 6.0\lib'
+ 
+Stop and restart your Apache webserver (so it can discover this new library).
+ 
+http://www.mysql.com/downloads/connector/j/5.1.html [Y/n]: y
+ 
+----------------------------------------------------------------------------
+Database server settings
+ 
+Specify the host and port number used to communicate with the database server.
+ 
+If the database server is on the same host as the webserver, enter '127.0.0.1'
+ 
+Database port number: [3306]: 3306
+ 
+Database server hostname: [127.0.0.1]: 127.0.0.1
+ 
+----------------------------------------------------------------------------
+ODK Aggregate database authentication settings
+ 
+The database server must be configured with an account (username and password)
+that ODK Aggregate will employ for accessing the database server. This is not
+an account that you will give to anyone; it is only for use by the ODK Aggregate
+webserver. Username and password should be alphanumeric strings beginning with a
+letter (no spaces or punctuation please!).
+ 
+The installer will generate a script that can be run on the database server to
+establish the required configuration.
+ 
+Database username: [odk_user]: odk_user
+ 
+Database password: :
+Retype password: :
+----------------------------------------------------------------------------
+ODK Aggregate database datastore settings
+ 
+The database server must be configured with a workspace identified by a database
+name, and, if using Postgresql, a schema name. This workspace is where ODK
+Aggregate will store uploaded forms, submissions and other information. The
+database name (and schema name for Postgresql) can be any alphanumeric strings
+beginning with a letter; underscores (_) are OK (no spaces or punctuation
+please!).
+ 
+The installer will generate a script that can be run on the database server to
+create the workspace.
+ 
+Database Name: [odk_prod]: odk_prod
+ 
+----------------------------------------------------------------------------
+ODK Aggregate Instance Name
+ 
+The ODK Aggregate instance name will be displayed to your users when they log
+into ODK Aggregate using their ODK Aggregate username and password. Including
+the name of your organization in the instance name can help users confirm that
+they have contacted the correct website.
+ 
+NOTE: During subsequent upgrades, any changes to this text will invalidate all
+the ODK Aggregate passwords configured on your webserver. To prevent
+disruptions during upgrades, please make a record of the name you have chosen.
+ 
+Please enter the name of your instance: []: odk_test
+ 
+----------------------------------------------------------------------------
+Super-user ODK Aggregate Username
+ 
+The user with this account will always have full permissions on the system.
+ 
+The first time ODK Aggregate runs, only this user is allowed to log onto the
+system. Upon first logging in, they should change their password and complete
+the configuration of ODK Aggregate by specifying additional users and what
+permissions those users have on the system. This user's password will be set to
+'aggregate' upon initial install or upon changing the ODK Aggregate instance
+name.
+ 
+Please enter an ODK Aggregate Username: []: admin
+ 
+----------------------------------------------------------------------------
+Setup is now ready to begin configuring ODK Aggregate.
+ 
+Do you want to continue? [Y/n]: y
+```
+
+Si va a la carpeta de instalación ( /home/sr/odk), encontrará tres archivos.
+```
+ODKAggregate.war
+README.html
+create_db_and_user.sql
+```
 
 
 
